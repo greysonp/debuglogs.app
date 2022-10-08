@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>debuglogs.app</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div id="content"></div>
+
+  <!-- Monaco -->
+  <link rel="stylesheet" data-name="/vs/editor/editor.main" href="/js/monaco-editor/min/vs/editor/editor.main.css" />
+  <script>
+    var require = { paths: { vs: '/js/monaco-editor/min/vs' } };
+  </script>
+  <script src="/js/monaco-editor/min/vs/loader.js"></script>
+  <script src="/js/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+  <script src="/js/monaco-editor/min/vs/editor/editor.main.js"></script>
+
+  <!-- Our Stuff-->
+  <script src="/js/main.js"></script>
+</body>
+</html>

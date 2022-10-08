@@ -1,0 +1,14 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#content {
+  width: 100%;
+  flex-grow: 1;
+  min-height: 0;
+}
