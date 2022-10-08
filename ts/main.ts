@@ -1,3 +1,5 @@
+declare const monaco:any
+
 async function main() {
   const debuglogUrl = `/proxy${window.location.pathname}`
   console.log(debuglogUrl)
@@ -53,21 +55,22 @@ function initMonaco() {
     }
   })
 
+
   const editor = monaco.editor.create(document.getElementById('content'), {
     value: 'Loading...',
     automaticLayout: true,
     language: 'logLanguage',
     theme: 'greysonDark',
     readOnly: true,
-    // fontFamily: 'JetBrains Mono',
+    fontFamily: 'JetBrains Mono',
     fontSize: 13,
     scrollBeyondLastLine: false,
     renderLineHighlight: 'all',
     lineNumbers: 'on',
+    glyphMargin: true,
     scrollbar: {
       alwaysConsumeMouseWheel: false
     },
-    // wordWrap: localStorage.getItem('wordWrap') || DEFAULT_WORD_WRAP,
   })
 
   document.fonts.ready.then(() => {

@@ -5,7 +5,9 @@ const app = new Application()
 app.use(async (ctx) => {
   const path = ctx.request.url.pathname
 
-  if (path.startsWith('/proxy/')) {
+  if (path.endsWith('.map')) {
+    ctx.response.status = 404
+  } else if (path.startsWith('/proxy/')) {
     const proxyRes = await fetch(`https://debuglogs.org/${path.substring('/proxy/'.length)}`);
     ctx.response.type = 'text/plain'
     ctx.response.headers.set('Content-Encoding', 'gzip')
