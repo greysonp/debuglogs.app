@@ -1,13 +1,13 @@
 declare const monaco:any
 
 async function main() {
-  const debuglogUrl = `/proxy${window.location.pathname}`
-  console.log(debuglogUrl)
-
   const editor = initMonaco()
 
+  const debuglogUrl = `/proxy${window.location.pathname}`
   const result = await fetch(debuglogUrl)
   const text = await result.text()
+
+  editor.setValue('Parsing...')
 
   editor.setValue(text)
 }
