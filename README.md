@@ -34,6 +34,18 @@ Or again, alternatively, the Deno task:
 deno task watch
 ```
 
+## Deploying
+
+You can deploy a version of this however you'd like, but debuglogs.app runs on a [Dokku](https://dokku.com/) instance.
+That's what the `Dockerfile` is for. If you'd also like to run it on Dokku, you can deploy it like a normal app, but
+remember to proxy the host port 80 to container port 8080.
+
+```bash
+dokku proxy:ports-add debuglogs.app http:80:8080
+```
+
+If you use the Dokku letsencrypt plugin, you can configure that per usual and it'll Just Work.
+
 ## How it works
 
 The server itself (`index.ts`) is little more than a proxy. It just serves static files and exposes a `/proxy` endpoint 
