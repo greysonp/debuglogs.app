@@ -23,6 +23,9 @@ async function main() {
 }
 
 function initMonaco() {
+  const isMobile = window.matchMedia("only screen and (max-width: 480px)").matches;
+  console.log(`isMobile: ${isMobile}`)
+
   monaco.languages.register({ id: 'logLanguage' })
 
   monaco.languages.setMonarchTokensProvider('logLanguage', {
@@ -77,7 +80,10 @@ function initMonaco() {
     scrollBeyondLastLine: false,
     renderLineHighlight: 'all',
     lineNumbers: 'on',
-    glyphMargin: true,
+    glyphMargin: !isMobile,
+    minimap: {
+      enabled: !isMobile
+    },
     scrollbar: {
       alwaysConsumeMouseWheel: false
     },
