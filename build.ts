@@ -26,7 +26,7 @@ async function build() {
       entryPoints: ['ts/main.ts'],
       bundle: true,
       sourcemap: true,
-      outfile: 'js/dist.js',
+      outfile: 'public/js/dist.js',
       write: true
     })
 

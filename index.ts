@@ -21,10 +21,10 @@ async function main() {
       }
     } else if (path.endsWith('.map') && !path.endsWith('dist.js.map')) {
       ctx.response.status = 404
-    } else if (path.startsWith('/js/') || path.startsWith('/css/')) {
+    } else if (path.startsWith('/public')) {
       await send(ctx, path.substring(1), {root: './'})
     } else {
-      await send(ctx, 'index.html', {root: './'})
+      await send(ctx, './public/index.html', {root: './'})
     }
   })
 
