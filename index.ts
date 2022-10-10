@@ -1,4 +1,4 @@
-import {Application, Context, Router, send} from 'https://deno.land/x/oak@v11.1.0/mod.ts';
+import {Application, send} from 'https://deno.land/x/oak@v11.1.0/mod.ts';
 
 async function main() {
   const app = new Application()

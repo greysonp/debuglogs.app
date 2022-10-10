@@ -4,21 +4,36 @@ declare const zip:any
 async function main() {
   const editor = initMonaco()
 
-  const debuglogUrl = `/proxy${window.location.pathname}`
-  const result = await fetch(debuglogUrl)
-  const contentType: string = result.headers.get('Content-Type') || ''
+  try {
+    const debuglogUrl = `/proxy${window.location.pathname}`
+    const result = await fetch(debuglogUrl)
+    const contentType: string = result.headers.get('Content-Type') || ''
 
-  if (contentType.indexOf('text/plain') >= 0) {
-    const text = await result.text()
+    console.log(`Got a log response. Status: ${result.status}`)
+
+    if (result.status !== 200) {
+      return alert(`Bad response when fetching the log! Status: ${result.status}`)
+    }
+
+    let text;
+    if (contentType.indexOf('text/plain') >= 0) {
+      console.log('Retrieved a plaintext log.')
+      text = await result.text()
+    } else if (contentType.indexOf('application/zip') >= 0) {
+      console.log('Retrieved a zip file log.')
+      editor.setValue('Unzipping...')
+      text = await readIosLog(result)
+    } else {
+      return alert(`Unsupported content type: ${contentType}`)
+    }
+
+    console.log('Successfully got text content.')
+
     editor.setValue('Parsing...')
     editor.setValue(text)
-  } else if (contentType.indexOf('application/zip') >= 0) {
-    editor.setValue('Unzipping...')
-    const text = await readIosLog(result)
-    editor.setValue('Parsing...')
-    editor.setValue(text)
-  } else {
-    alert(`Unsupported content type: ${contentType}`)
+  } catch (e) {
+    alert('Failed to fetch the log! Check the console for details.')
+    console.error(e)
   }
 }
 
