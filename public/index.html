@@ -11,25 +11,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
 
-  <!-- Our Stuff -->
-  <link rel="stylesheet" href="/public/css/style.css" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      padding: 16px;
+      background: #2b2b2b;
+      color: #ffffff;
+      text-align: center;
+    }
+    code {
+      display: inline;
+      background: rgba(255, 255, 255, .2);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+  </style>
 </head>
 <body>
-  <div id="content"></div>
-
-  <!-- Zip (must come before monaco -- the require var screws up the load otherwise) -->
-  <script type="text/javascript" src="/public/js/lib/zip.min.js"></script>
-
-  <!-- Monaco -->
-  <link rel="stylesheet" data-name="/vs/editor/editor.main" href="/public/js/lib/monaco-editor/min/vs/editor/editor.main.css" />
-  <script>
-    var require = { paths: { vs: '/public/js/lib/monaco-editor/min/vs' } };
-  </script>
-  <script src="/public/js/lib/monaco-editor/min/vs/loader.js"></script>
-  <script src="/public/js/lib/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
-  <script src="/public/js/lib/monaco-editor/min/vs/editor/editor.main.js"></script>
-
-  <!-- Our Stuff-->
-  <script src="/public/js/dist.js"></script>
+  <p>Welcome to debuglogs.app!</p>
+  <p>To use the site, take any debuglogs.org link, and replace <code>.org</code> with <code>.app</code>.</p>
 </body>
 </html>

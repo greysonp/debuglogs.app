@@ -23,8 +23,10 @@ async function main() {
       ctx.response.status = 404
     } else if (path.startsWith('/public')) {
       await send(ctx, path.substring(1), {root: './'})
-    } else {
+    } else if (path === '/') {
       await send(ctx, './public/index.html', {root: './'})
+    } else {
+      await send(ctx, './public/log.html', {root: './'})
     }
   })
 

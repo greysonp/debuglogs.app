@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>debuglogs.app</title>
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+  <!-- Our Stuff -->
+  <link rel="stylesheet" href="/public/css/style.css" />
+</head>
+<body>
+  <div id="content"></div>
+
+  <!-- Zip (must come before monaco -- the require var screws up the load otherwise) -->
+  <script type="text/javascript" src="/public/js/lib/zip.min.js"></script>
+
+  <!-- Monaco -->
+  <link rel="stylesheet" data-name="/vs/editor/editor.main" href="/public/js/lib/monaco-editor/min/vs/editor/editor.main.css" />
+  <script>
+    var require = { paths: { vs: '/public/js/lib/monaco-editor/min/vs' } };
+  </script>
+  <script src="/public/js/lib/monaco-editor/min/vs/loader.js"></script>
+  <script src="/public/js/lib/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+  <script src="/public/js/lib/monaco-editor/min/vs/editor/editor.main.js"></script>
+
+  <!-- Our Stuff-->
+  <script src="/public/js/dist.js"></script>
+</body>
+</html>
