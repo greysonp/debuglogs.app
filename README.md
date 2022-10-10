@@ -14,7 +14,11 @@ The quickest way to get started is to simply run:
 ```
 
 This will build the client and start the server on port 8080. You can view any log by replacing `debuglogs.org` with
-`localhost:8080`.
+`localhost:8080`. Alternatively, you can use the (currently unstable) Deno task system:
+
+```bash
+deno task start
+```
 
 ##  Developing
 
@@ -22,6 +26,12 @@ During development, you can run the builder in "watch" mode to re-compile the cl
 
 ```bash
 deno run -A build.ts --watch
+```
+
+Or again, alternatively, the Deno task:
+
+```bash
+deno task watch
 ```
 
 ## How it works

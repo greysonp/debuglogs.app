@@ -7,5 +7,10 @@
   ],
   "exclude": [
     "index.ts"
-  ]
+  ],
+  "tasks": {
+    "start": "deno run -A build.ts && deno run -A index.ts",
+    "build": "deno run -A build.ts",
+    "watch": "deno run -A build.ts --watch"
+  }
 }
