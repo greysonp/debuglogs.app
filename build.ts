@@ -19,23 +19,29 @@ async function main() {
 }
 
 async function build() {
-  log('Building...')
+  try {
+    log('Building...')
 
-  const result = await esbuild.build({
-    entryPoints: ['ts/main.ts'],
-    bundle: true,
-    sourcemap: true,
-    outfile: 'js/dist.js',
-    write: true
-  })
+    const result = await esbuild.build({
+      entryPoints: ['ts/main.ts'],
+      bundle: true,
+      sourcemap: true,
+      outfile: 'js/dist.js',
+      write: true
+    })
 
-  log('Complete!')
+    log('Complete!')
 
-  if (result.errors.length > 0 || result.warnings.length > 0) {
-    log(result)
+    if (result.errors.length > 0 || result.warnings.length > 0) {
+      log(result)
+    }
+
+  } catch (e) {
+    log('Failed to build!')
+    log(e)
+  } finally {
+    esbuild.stop()
   }
-
-  esbuild.stop()
 }
 
 function log(message: any) {

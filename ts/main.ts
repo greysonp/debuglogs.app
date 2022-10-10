@@ -1,15 +1,25 @@
 declare const monaco:any
+declare const zip:any
 
 async function main() {
   const editor = initMonaco()
 
   const debuglogUrl = `/proxy${window.location.pathname}`
   const result = await fetch(debuglogUrl)
-  const text = await result.text()
+  const contentType: string = result.headers.get('Content-Type') || ''
 
-  editor.setValue('Parsing...')
-
-  editor.setValue(text)
+  if (contentType.indexOf('text/plain') >= 0) {
+    const text = await result.text()
+    editor.setValue('Parsing...')
+    editor.setValue(text)
+  } else if (contentType.indexOf('application/zip') >= 0) {
+    editor.setValue('Unzipping...')
+    const text = await readIosLog(result)
+    editor.setValue('Parsing...')
+    editor.setValue(text)
+  } else {
+    alert(`Unsupported content type: ${contentType}`)
+  }
 }
 
 function initMonaco() {
@@ -82,6 +92,59 @@ function initMonaco() {
   }
 
   return editor
+}
+
+const NSE_HEADER = '========= NOTIFICATION SERVICE EXTENSION ========='
+const SHARE_HEADER = '========= SHARE EXTENSION ========='
+const GENERAL_HEADER = '========= GENERAL ========='
+
+async function readIosLog(response: Response): Promise<string> {
+  const blob = await response.blob()
+  const blobReader = new zip.BlobReader(blob)
+  const zipReader = new zip.ZipReader(blobReader);
+  const entries = await zipReader.getEntries()
+
+  const shareEntries = []
+  const nseEntries = []
+  const generalEntries = []
+
+  for (const entry of entries) {
+    if (entry.filename.indexOf('shareextension') >= 0) {
+      shareEntries.push(entry)
+    } else if (entry.filename.indexOf('SignalNSE') >= 0) {
+      nseEntries.push(entry)
+    } else {
+      generalEntries.push(entry)
+    }
+  }
+
+  shareEntries.sort((lhs, rhs) => lhs.lastModDate.getTime() - rhs.lastModDate.getTime())
+  nseEntries.sort((lhs, rhs) => lhs.lastModDate.getTime() - rhs.lastModDate.getTime())
+  generalEntries.sort((lhs, rhs) => lhs.lastModDate.getTime() - rhs.lastModDate.getTime())
+
+  let text = NSE_HEADER + '\n'
+  for (const e of nseEntries) {
+    text += await e.getData(new zip.TextWriter());
+    text += '\n'
+  }
+
+  text += '\n\n'
+
+  text += SHARE_HEADER + '\n'
+  for (const e of shareEntries) {
+    text += await e.getData(new zip.TextWriter());
+    text += '\n'
+  }
+
+  text += '\n\n'
+
+  text += GENERAL_HEADER + '\n'
+  for (const e of generalEntries) {
+    text += await e.getData(new zip.TextWriter());
+    text += '\n'
+  }
+
+  return text
 }
 
 main()
