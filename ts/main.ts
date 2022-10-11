@@ -1,5 +1,12 @@
-declare const monaco:any
-declare const zip:any
+import {LogParser, LogResult} from './parsing/LogParser.ts';
+import {LineStyleType} from './parsing/LineStyle.ts';
+
+declare const monaco: any
+declare const zip: any
+
+const NSE_HEADER = '========= NOTIFICATION SERVICE EXTENSION ========='
+const SHARE_HEADER = '========= SHARE EXTENSION ========='
+const GENERAL_HEADER = '========= GENERAL ========='
 
 async function main() {
   const editor = initMonaco()
@@ -30,7 +37,10 @@ async function main() {
     console.log('Successfully got text content.')
 
     editor.setValue('Parsing...')
-    editor.setValue(text)
+    const logResult: LogResult = LogParser.parse(window.location.pathname, text)
+
+    renderLogResult(editor, logResult)
+
   } catch (e) {
     alert('Failed to fetch the log! Check the console for details.')
     console.error(e)
@@ -115,9 +125,55 @@ function initMonaco() {
   return editor
 }
 
-const NSE_HEADER = '========= NOTIFICATION SERVICE EXTENSION ========='
-const SHARE_HEADER = '========= SHARE EXTENSION ========='
-const GENERAL_HEADER = '========= GENERAL ========='
+function renderLogResult(editor: any, result: LogResult) {
+  editor.setValue(result.lines.join('\n'))
+
+  const foldingRanges: any[] = result.foldingRanges.map(range => {
+    return {
+      start: range.start,
+      end: range.end,
+      kind: range.expandByDefault ? null : monaco.languages.FoldingRangeKind.Comment
+    }
+  })
+
+  monaco.languages.registerFoldingRangeProvider('logLanguage', {
+    provideFoldingRanges: function(model: any, context: any, token: any) {
+      return foldingRanges;
+    }
+  });
+
+  editor.getAction('editor.foldAllBlockComments').run();
+
+  editor.deltaDecorations([], result.lineStyles.map(style => {
+    return {
+      range: new monaco.Range(style.lineRange.start, 1, style.lineRange.end, 1000),
+      options: lineStyleToDecorationOptions(style.type)
+    }
+  }));
+}
+
+function lineStyleToDecorationOptions(style: LineStyleType) {
+  switch (style) {
+    case LineStyleType.TITLE:
+      return {
+        inlineClassName: 'logstyle-title'
+      }
+    case LineStyleType.ALERT:
+      return {
+        inlineClassName: 'logstyle-alert'
+      }
+    case LineStyleType.LOGCAT:
+      return {
+        isWholeLine: true,
+        className: 'logstyle-logcat',
+        glyphMarginClassName: 'glyph-logcat',
+        glyphMarginHoverMessage: {
+          value: 'This is from logcat, not our custom logger.'
+        }
+      }
+    default: return ''
+  }
+}
 
 async function readIosLog(response: Response): Promise<string> {
   const blob = await response.blob()
