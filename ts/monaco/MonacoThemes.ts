@@ -13,6 +13,8 @@ export const DEFAULT = GREYSON_DARK
 
 export function apply(id: string) {
   document.getElementsByTagName('body')[0].className = `theme-${id}`;
+  document.querySelectorAll('#theme-dropdown li').forEach(e => e.classList.remove('active'))
+  document.querySelector(`li[data-id=${id}]`).classList.add('active')
 }
 
 export function getTheme(): string {
