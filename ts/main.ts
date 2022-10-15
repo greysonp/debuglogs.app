@@ -8,9 +8,9 @@ import * as LogFetcher from './LogFetcher.ts'
 declare const monaco: any
 
 async function main() {
-  MonacoThemes.apply(MonacoThemes.getTheme())
-  
   const editor = initMonaco()
+
+  initToolbar()
 
   try {
     const logText = await LogFetcher.fetchLog(window.location.pathname, editor)
@@ -62,6 +62,17 @@ function initMonaco() {
   }
 
   return editor
+}
+
+function initToolbar() {
+  document.querySelectorAll('#theme-dropdown li').forEach(element => {
+    element.addEventListener('click', event => {
+      event.preventDefault()
+      const themeId = event.target.dataset.id
+      monaco.editor.setTheme(themeId)
+      MonacoThemes.setTheme(themeId)
+    })
+  })
 }
 
 function renderLogResult(editor: any, result: LogResult) {

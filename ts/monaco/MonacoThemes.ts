@@ -21,6 +21,7 @@ export function getTheme(): string {
 
 export function setTheme(id: string) {
   localStorage.setItem(KEY_THEME, id)
+  apply(id)
 }
 
 export function register(monaco: any) {

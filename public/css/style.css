@@ -1,3 +1,10 @@
+:root {
+  --toolbar-color: #333;
+  --toolbar-item-padding: 5px;
+  --toolbar-item-hover-color: #444;
+  --monaco-hud-font: -apple-system, BlinkMacSystemFont, Segoe WPC, Segoe UI, HelveticaNeue-Light, system-ui, Ubuntu, Droid Sans, sans-serif;
+}
+
 body, html {
   height: 100%;
   margin: 0;
@@ -25,4 +32,88 @@ body, html {
 
 .glyph-logcat:after {
   content: '🐱'
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  z-index: 1000;
+  background: var(--toolbar-color);
+  font-family: var(--monaco-hud-font);
+  font-size: 13px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  display: inline-block;
+}
+
+nav li {
+  color: #fff;
+  display: block;
+  position: relative;
+  text-decoration: none;
+  padding: var(--toolbar-item-padding);
+}
+
+nav li a {
+  color: #fff;
+}
+
+nav li:hover {
+  cursor: pointer;
+  background: var(--toolbar-item-hover-color);
+}
+
+nav ul li ul {
+  visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+  position: absolute;
+  margin-top: var(--toolbar-item-padding);
+  left: 0;
+  display: none;
+  background: var(--toolbar-color);
+}
+
+nav ul li:hover > ul,
+nav ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+nav ul li ul li {
+  clear: both;
+  width: 120px;
+  background: var(--toolbar-color);
+}
+
+nav .title {
+  color: white;
+  font-weight: bolder;
+  margin-right: 4px;
+  padding-right: 12px;
+  position: relative;
+  bottom: 2px;
+  border-right: 1px solid #444;
+}
+
+nav .logo {
+  margin-left: 8px;
+  margin-right: 4px;
+  position: relative;
+  top: 4px;
+}
+
+nav .arrow {
+  font-size: 9px;
+  position: relative;
+  bottom: 2px;
+  padding-left: 2px;
+  opacity: 0.7;
 }

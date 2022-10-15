@@ -16,6 +16,26 @@
 </head>
 <body>
   <script src="/public/js/preload.js"></script>
+
+  <nav role="navigation">
+    <img src="/public/img/icon.svg" class="logo" />
+    <span class="title">debuglogs.app</span>
+    <ul>
+      <li>
+        <a href="#">Theme <span class="arrow">▾</span></a>
+        <ul class="dropdown" id="theme-dropdown">
+          <li data-id="greysonDark">Greyson Dark</li>
+          <li data-id="dracula">Dracula</li>
+          <li data-id="jetbrainsDarcula">Jetbrains Darcula</li>
+          <li data-id="solarizedDark">Solarized Dark</li>
+          <li data-id="solarizedLight">Solarized Light</li>
+          <li data-id="github">Github</li>
+          <li data-id="atomOneLight">AtomOne Light</li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
   <div id="content"></div>
 
   <!-- Zip (must come before monaco -- the require var screws up the load otherwise) -->
