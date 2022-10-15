@@ -1,3 +1,5 @@
 .idea/
 public/js/dist.js
 public/js/dist.js.map
+public/js/preload.js
+public/js/preload.js.map

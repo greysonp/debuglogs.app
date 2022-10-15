@@ -8,6 +8,8 @@ import * as LogFetcher from './LogFetcher.ts'
 declare const monaco: any
 
 async function main() {
+  MonacoThemes.apply(MonacoThemes.getTheme())
+  
   const editor = initMonaco()
 
   try {

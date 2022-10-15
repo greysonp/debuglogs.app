@@ -7,7 +7,21 @@ const JETBRAINS_DARCULA = 'jetbrainsDarcula'
 const SOLARIZED_DARK = 'solarizedDark'
 const SOLARIZED_LIGHT = 'solarizedLight'
 
+const KEY_THEME = 'theme'
+
 export const DEFAULT = GREYSON_DARK
+
+export function apply(id: string) {
+  document.getElementsByTagName('body')[0].className = `theme-${id}`;
+}
+
+export function getTheme(): string {
+  return localStorage.getItem(KEY_THEME) || DEFAULT
+}
+
+export function setTheme(id: string) {
+  localStorage.setItem(KEY_THEME, id)
+}
 
 export function register(monaco: any) {
   monaco.editor.defineTheme(GREYSON_DARK, {

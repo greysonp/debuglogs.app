@@ -19,7 +19,7 @@ async function main() {
         ctx.response.headers.set('Content-Encoding', 'gzip')
         ctx.response.body = proxyRes.body
       }
-    } else if (path.endsWith('.map') && !path.endsWith('dist.js.map')) {
+    } else if (path.endsWith('.map') && !path.endsWith('dist.js.map') && !path.endsWith('preload.js.map')) {
       ctx.response.status = 404
     } else if (path.startsWith('/public')) {
       await send(ctx, path.substring(1), {root: './'})

@@ -22,7 +22,7 @@ async function build() {
   try {
     log('Building...')
 
-    const result = await esbuild.build({
+    const mainResult = await esbuild.build({
       entryPoints: ['ts/main.ts'],
       bundle: true,
       sourcemap: true,
@@ -30,10 +30,22 @@ async function build() {
       write: true
     })
 
+    if (mainResult.errors.length > 0 || mainResult.warnings.length > 0) {
+      log(mainResult)
+    }
+
+    const preloadResult = await esbuild.build({
+      entryPoints: ['ts/preload.ts'],
+      bundle: true,
+      sourcemap: true,
+      outfile: 'public/js/preload.js',
+      write: true
+    })
+
     log('Complete!')
 
-    if (result.errors.length > 0 || result.warnings.length > 0) {
-      log(result)
+    if (preloadResult.errors.length > 0 || preloadResult.warnings.length > 0) {
+      log(mainResult)
     }
 
   } catch (e) {
