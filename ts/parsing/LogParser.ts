@@ -6,55 +6,52 @@ import {AndroidLogcatSection} from './AndroidLogcatSection.ts';
 
 const TITLE_PATTERN = /^=+([^=]+)=+$/
 
-export class LogParser {
-
-  static parse(path: string, log: string): LogResult {
-    const client: Client = parseClient(path)
-    const lines = log.split('\n')
-    const sections: Section[] = parseSections(client, lines)
-    const out: LogResult = {
-      lines: [],
-      foldingRanges: [],
-      lineStyles: []
-    }
-
-    let currentLine = 1;
-    let foldStart = currentLine;
-
-    for (const section of sections) {
-      out.lines.push(section.title)
-      out.lineStyles.push({ lineRange: { start: currentLine, end: currentLine }, type: LineStyleType.TITLE });
-
-      section.lineStyles.map(style => {
-        return {
-          lineRange: {
-            start: style.lineRange.start + currentLine,
-            end: style.lineRange.end + currentLine
-          },
-          type: style.type
-        }
-      }).forEach(style => out.lineStyles.push(style));
-
-      foldStart = currentLine;
-      currentLine++;
-
-      for (const line of section.lines) {
-        out.lines.push(line)
-        currentLine++;
-      }
-
-      out.foldingRanges.push({
-        start: foldStart,
-        end: currentLine,
-        expandByDefault: section.expandByDefault
-      });
-
-      out.lines.push('');
-      currentLine++;
-    }
-
-    return out
+export function parse(path: string, log: string): LogResult {
+  const client: Client = parseClient(path)
+  const lines = log.split('\n')
+  const sections: Section[] = parseSections(client, lines)
+  const out: LogResult = {
+    lines: [],
+    foldingRanges: [],
+    lineStyles: []
   }
+
+  let currentLine = 1;
+  let foldStart = currentLine;
+
+  for (const section of sections) {
+    out.lines.push(section.title)
+    out.lineStyles.push({ lineRange: { start: currentLine, end: currentLine }, type: LineStyleType.TITLE });
+
+    section.lineStyles.map(style => {
+      return {
+        lineRange: {
+          start: style.lineRange.start + currentLine,
+          end: style.lineRange.end + currentLine
+        },
+        type: style.type
+      }
+    }).forEach(style => out.lineStyles.push(style));
+
+    foldStart = currentLine;
+    currentLine++;
+
+    for (const line of section.lines) {
+      out.lines.push(line)
+      currentLine++;
+    }
+
+    out.foldingRanges.push({
+      start: foldStart,
+      end: currentLine,
+      expandByDefault: section.expandByDefault
+    });
+
+    out.lines.push('');
+    currentLine++;
+  }
+
+  return out
 }
 
 function parseSections(client: Client, lines: string[]): Section[] {

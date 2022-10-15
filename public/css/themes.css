@@ -1,0 +1,107 @@
+/** ==================**/
+/**  Atom One Light   **/
+/** ==================**/
+body.theme-atomOneLight {
+  background-color: #f8f8f8;
+}
+
+.theme-atomOneLight .log-alert {
+  color: #de3d35;
+}
+
+.theme-atomOneLight .glyph-foreground {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/** ==================**/
+/**       Dracula     **/
+/** ==================**/
+body.theme-dracula {
+  background-color: #282a36;
+}
+
+.theme-dracula .log-alert {
+  color: #ff5555;
+}
+
+.theme-dracula .glyph-foreground {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/** ==================**/
+/**       Github      **/
+/** ==================**/
+body.theme-github {
+  background-color: #f4f4f4;
+}
+
+.theme-github .log-alert {
+  color: #970b16;
+}
+
+.theme-github .glyph-foreground {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+
+/** ==================**/
+/**    Greyson Dark   **/
+/** ==================**/
+body.theme-greysonDark {
+  background-color: #2b2b2b;
+}
+
+.theme-greysonDark .log-alert {
+  color: #ff6b68;
+}
+
+.theme-greysonDark .glyph-foreground {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/** ==================**/
+/** Jetbrains Darcula **/
+/** ==================**/
+body.theme-jetbrainsDarcula {
+  background-color: #242424;
+}
+
+.theme-jetbrainsDarcula .log-alert {
+  color: #ff6b68;
+}
+
+.theme-jetbrainsDarcula .glyph-foreground {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/** ==================**/
+/** Solarized Dark **/
+/** ==================**/
+body.theme-solarizedDark {
+  background-color: #001e26;
+}
+
+.theme-solarizedDark .log-alert {
+  color: #d01b24;
+}
+
+.theme-solarizedDark .glyph-foreground {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/** ==================**/
+/** Solarized Light **/
+/** ==================**/
+body.theme-solarizedLight {
+  background-color: #fdf6e3;
+  color: #52676f;
+}
+
+.theme-solarizedLight .log-alert {
+  color: #d70000;
+}
+
+.theme-solarizedLight .glyph-foreground {
+  background: rgba(0, 0, 0, 0.2);
+}
+
