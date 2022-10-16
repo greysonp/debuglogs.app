@@ -79,6 +79,10 @@ function initToolbar() {
       MonacoThemes.setTheme(themeId)
     })
   })
+
+  document.querySelector('#download-button').addEventListener('click', event => {
+    window.location.pathname = '/download' + window.location.pathname
+  })
 }
 
 function renderLogResult(editor: any, result: LogResult) {

@@ -18,15 +18,21 @@ async function main() {
       const proxied = path.substring('/proxy/'.length)
 
       if (proxied.startsWith('ios')) {
-        const proxyRes = await fetch(`https://debuglogs.org/${proxied}`);
+        const proxyRes = await fetch(`https://debuglogs.org/${proxied}`)
         ctx.response.type = 'application/zip'
         ctx.response.body = proxyRes.body
       } else {
-        const proxyRes = await fetch(`https://debuglogs.org/${proxied}`);
+        const proxyRes = await fetch(`https://debuglogs.org/${proxied}`)
         ctx.response.type = 'text/plain'
         ctx.response.headers.set('Content-Encoding', 'gzip')
         ctx.response.body = proxyRes.body
       }
+    } else if (path.startsWith('/download/')) {
+      const proxied = path.substring('/download/'.length)
+      const proxyRes = await fetch(`https://debuglogs.org/${proxied}`)
+      ctx.response.type = proxyRes.type
+      ctx.response.headers = proxyRes.headers
+      ctx.response.body = proxyRes.body
     } else if (path.endsWith('.map') && !path.endsWith('dist.js.map') && !path.endsWith('preload.js.map')) {
       ctx.response.status = 404
     } else if (path.startsWith('/public')) {

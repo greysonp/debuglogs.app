@@ -127,3 +127,16 @@ nav li.active {
 nav li.active::after{
   content: ' •';
 }
+
+nav button {
+  background: none;
+  color: var(--toolbar-text-color);
+  border-radius: 3px;
+  border: none;
+  font-family: var(--monaco-hud-font);
+  cursor: pointer;
+}
+
+nav button:hover {
+  background: var(--toolbar-item-hover-color);
+}
