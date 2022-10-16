@@ -45,7 +45,7 @@ async function build() {
     log('Complete!')
 
     if (preloadResult.errors.length > 0 || preloadResult.warnings.length > 0) {
-      log(mainResult)
+      log(preloadResult)
     }
 
   } catch (e) {
