@@ -1,3 +1,6 @@
+/**
+ * A collection of functions related to theming the viewer.
+ */
 
 const GREYSON_DARK = 'greysonDark'
 const ATOM_ONE_LIGHT = 'atomOneLight'

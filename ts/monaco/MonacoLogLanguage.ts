@@ -1,3 +1,7 @@
+/**
+ * Just a place to define the language we register to get syntax highlighting working in Monaco.
+ */
+
 export const ID = 'logLanguage'
 
 export function register(monaco: any) {

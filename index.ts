@@ -1,3 +1,11 @@
+/**
+ * This is the server. It's fairly simple. It's main purpose is to simply forward files from
+ * debuglogs.org to the requesting client, as well serve some static files.
+ *
+ * Besides the few routes we want to handle ourselves, almost everything just gets redirected
+ * to log.html so it can do it's thing.
+ */
+
 import {Application, send} from 'https://deno.land/x/oak@v11.1.0/mod.ts';
 
 async function main() {

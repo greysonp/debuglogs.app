@@ -1,3 +1,7 @@
+/**
+ * The primary entrypoint for our client code.
+ */
+
 import {LineStyleType} from './parsing/LineStyle.ts';
 import { LogResult} from './parsing/LogParser.ts';
 import * as LogParser from './parsing/LogParser.ts'

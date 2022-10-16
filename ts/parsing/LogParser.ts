@@ -6,6 +6,13 @@ import {AndroidLogcatSection} from './AndroidLogcatSection.ts';
 
 const TITLE_PATTERN = /^=+([^=]+)=+$/
 
+/**
+ * Takes the raw text of the log and converts it into a {@link LogResult}, which has all the info we
+ * need for throwing it into Monaco with all the special formatting we want.
+ *
+ * @param path The path the log was found at (we can use this to determine if it's an android/ios/desktop log)
+ * @param log The actual text of the log
+ */
 export function parse(path: string, log: string): LogResult {
   const client: Client = parseClient(path)
   const lines = log.split('\n')

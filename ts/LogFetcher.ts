@@ -1,11 +1,12 @@
-import ca from 'https://deno.land/x/deno_libphonenumber@v1.9.20/index.js';
-
 declare const zip: any
 
 const NSE_HEADER = '========= NOTIFICATION SERVICE EXTENSION ========='
 const SHARE_HEADER = '========= SHARE EXTENSION ========='
 const GENERAL_HEADER = '========= GENERAL ========='
 
+/**
+ * Retrieves the text of the log, doing whatever is needed (like unzipping an iOS log).
+ */
 export async function fetchLog(logUrl: string, editor: any): Promise<string> {
   const debuglogUrl = `/proxy${logUrl}`
   const result = await fetch(debuglogUrl)
