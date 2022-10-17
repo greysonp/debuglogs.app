@@ -6,6 +6,8 @@ To use the site, simply replace `.org` with `.app` on any debuglog, and you'll j
 If you'd like to do this automatically, you can use the 'Always debuglogs.app' extension, which you can find here: 
 [link](https://github.com/greysonp/debuglogs.app-extension).
 
+[![Firefox Add-on](gh-assets/firefox-add-on-icon.png)](https://addons.mozilla.org/en-US/firefox/addon/always-debuglogs-app/)
+
 ## Running locally
 
 This is a simple Deno/TypeScript app. The only dependency is [Deno](https://deno.land/#installation).
