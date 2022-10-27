@@ -16,29 +16,22 @@ This is a simple Deno/TypeScript app. The only dependency is [Deno](https://deno
 The quickest way to get started is to simply run:
 
 ```bash
-./run.sh
+deno task start
 ```
 
 This will build the client and start the server on port 8080. You can view any log by replacing `debuglogs.org` with
-`localhost:8080`. Alternatively, you can use the (currently unstable) Deno task system:
-
-```bash
-deno task start
-```
+`localhost:8080`. 
 
 ##  Developing
 
 During development, you can run the builder in "watch" mode to re-compile the client code whenever you change something:
 
 ```bash
-deno run -A build.ts --watch
-```
-
-Or again, alternatively, the Deno task:
-
-```bash
 deno task watch
 ```
+
+Note: This only watches the client code, _not_ the server code.
+
 
 ## Deploying
 

@@ -1,4 +1,4 @@
-FROM denoland/deno:1.26.1
+FROM denoland/deno:1.27.0
 COPY . ./
 EXPOSE 8080
-CMD ["bash", "run.sh"]
+CMD ["deno", "task", "start"]
